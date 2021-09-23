@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "user_exams")
+
 //        uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "exam_id"})}
 public class UserExam {
     @Id
@@ -29,6 +30,10 @@ public class UserExam {
     @OneToMany(mappedBy = "userExam", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserAnswer> userAnswers;
 
+    public UserExam(User user, Exam exam) {
+        this.user = user;
+        this.exam = exam;
+    }
 //    public UserExam(User user) {
 //        this.user = user;
 //    }

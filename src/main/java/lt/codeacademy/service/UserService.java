@@ -20,7 +20,7 @@ public class UserService {
                 ;
     }
 
-    public User getUser(String name) {
+    public User getCreateUser(String name) {
         User user = userRepository.getUser(name);
         if (null == user) {
             user = new User();

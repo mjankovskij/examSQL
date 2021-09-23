@@ -2,8 +2,6 @@ package lt.codeacademy.service;
 
 import lt.codeacademy.entity.Exam;
 import lt.codeacademy.entity.Question;
-import lt.codeacademy.entity.User;
-import lt.codeacademy.repository.ExamRepository;
 import lt.codeacademy.repository.QuestionRepository;
 
 import java.util.Scanner;
@@ -18,6 +16,8 @@ public class QuestionService {
         questionRepository = new QuestionRepository();
     }
 
+    // Egzamino kurimas arba atnaujinimas.
+    // Kelias is ExamService.
     public boolean createUpdateQuestion(Exam exam, Question question) {
         String description;
         int minLength = 5;
@@ -54,6 +54,7 @@ public class QuestionService {
                 }
                 questionRepository.createUpdate(question);
                 sc.nextLine();
+                System.out.println("Klausimas sekmingai sukurtas/atnaujintas.");
                 return true;
             } else {
                 System.out.println("Klausima turi sudaryti " + minLength + "-" + maxLength + " simboliu.");
@@ -72,20 +73,18 @@ public class QuestionService {
                 System.out.println(e.getId() + " - " + e.getDescription());
             });
             num = sc.nextLong();
-//            setExam(examRepository.getExam(num));
+
             if (0 == num) {
                 return;
             }
             if (null != questionRepository.get(num)) {
                 sc.nextLine();
                 createUpdateQuestion(exam, questionRepository.get(num));
-                System.out.println("Klausimas sekmingai atnaujintas.");
             } else {
                 System.out.println("Tokio klausimo nera.");
             }
         }
     }
-
 
     public String enterAnswer(char qNum) {
         String answer;

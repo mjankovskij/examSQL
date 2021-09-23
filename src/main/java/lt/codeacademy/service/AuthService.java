@@ -18,7 +18,7 @@ public class AuthService {
             System.out.println("Iveskite varda:");
             name = sc.nextLine();
             if (userService.validateName(name)) {
-            return userService.getUser(name);
+            return userService.getCreateUser(name);
             } else {
                 System.out.println("Varda turi sudaryti tik raides, ilgis 2-20 simboliu.");
             }

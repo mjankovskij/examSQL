@@ -3,6 +3,7 @@ package lt.codeacademy.repository;
 import lt.codeacademy.entity.Exam;
 import lt.codeacademy.entity.Question;
 import lt.codeacademy.entity.User;
+import lt.codeacademy.entity.UserExam;
 
 import java.util.List;
 
@@ -23,8 +24,9 @@ public class QuestionRepository extends AbstractRepository {
     public long countQuestions(Long exam_id) {
         return (long) getEntityInformation(
                 session ->
-                        session.createQuery("SELECT COUNT(*) FROM Question WHERE exam_id = " + exam_id)
-                        .getSingleResult()
+                        session.createQuery("SELECT COUNT(*) FROM Question WHERE exam_id = :exam_id")
+                                .setParameter("exam_id", exam_id)
+                                .getSingleResult()
         );
     }
 
