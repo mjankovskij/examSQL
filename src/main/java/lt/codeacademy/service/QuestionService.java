@@ -62,6 +62,34 @@ public class QuestionService {
         }
     }
 
+    public void questionAddOrUpdate(Exam exam){
+        while (true) {
+            System.out.println(" --------------------------------------------");
+            System.out.println("|   0 - Atgal                               |");
+            System.out.println("|   1 - Redaguoti viena is esamu klausimu   |");
+            System.out.println("|   2 - Kurti naujus klausimus              |");
+            System.out.println(" --------------------------------------------");
+
+            String select = sc.nextLine();
+            switch (select) {
+                case "0" -> {
+                    return;
+                }
+                case "1" -> {
+                    selectQuestionToUpdate(exam);
+                }
+                case "2" -> {
+                    while (createUpdateQuestion(exam, new Question())) {
+                        // vidaus nereikia, cia del update galimybes perkeltas while.
+                    }
+                }
+                default -> {
+                    System.out.println("Tokio pasirinkimo nera.");
+                }
+            }
+        }
+    }
+
     public void selectQuestionToUpdate(Exam exam) {
         long num;
         while (true) {

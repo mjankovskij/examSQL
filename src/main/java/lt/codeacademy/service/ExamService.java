@@ -66,29 +66,31 @@ public class ExamService {
         sc.nextLine();
 
         while (true) {
-            System.out.println(" -----------------------------");
-            System.out.println("|   0 - Atgal                |");
-            System.out.println("|   1 - Laikyti egzamina     |");
-            System.out.println("|   2 - Redaguoti egzamina   |");
-            System.out.println("|   3 - Istrinti egzamina    |");
-            System.out.println(" -----------------------------");
+            System.out.println(" ------------------------------");
+            System.out.println("|   0 - Atgal                 |");
+            System.out.println("|   1 - Laikyti egzamina      |");
+            System.out.println("|   2 - Redaguoti egzamina    |");
+            System.out.println("|   3 - Istrinti egzamina     |");
+            System.out.println("|   4 - Egzamino statistika   |");
+            System.out.println(" ------------------------------");
             String select = sc.nextLine();
             switch (select) {
                 case "1" -> {
-                    if (null == userExamService.getByUserAndExamIds(user.getId(), exam.getId())) {
+//                    if (null == userExamService.getByUserAndExamIds(user.getId(), exam.getId())) {
                         examStart(userExamService);
-                    } else {
-                        System.out.println("Sis egzaminas jau laikytas.");
-                        return;
-                    }
+//                    } else {
+//                        System.out.println("Sis egzaminas jau laikytas.");
+//                        return;
+//                    }
                 }
                 case "2" -> {
                     createUpdate(exam);
-                    return;
                 }
                 case "3" -> {
                     deleteExam(exam);
-                    return;
+                }
+                case "4" -> {
+                    stats(exam);
                 }
                 case "0" -> {
                     return;
@@ -97,8 +99,16 @@ public class ExamService {
                     System.out.println("Pasirinkite teisinga veiksma.");
                 }
             }
-            sc.nextLine();
+//            sc.nextLine();
         }
+    }
+
+    private void stats(Exam exam){
+        System.out.println(exam.getName() + " statistika:");
+        System.out.println("Sprestas kartu: " + exam.getUserExams().size());
+        System.out.println("-");
+        System.out.println("Viso pasirinkta:");
+        System.out.println("a: " + exam.getUserExams());
     }
 
     // 1 Laikyti egzamina
@@ -114,17 +124,16 @@ public class ExamService {
 
         List<UserAnswer> userAnswers = answerQuestionsProcess(userExam);
 
-        if (null == userExamService.getByUserAndExamIds(user.getId(), exam.getId())) {
-
-            System.out.println(1);
+//        if (null == userExamService.getByUserAndExamIds(user.getId(), exam.getId())) {
+        int result = userExamService.getResult(userExam);
+        userExam.setResult(result);
             userExamService.create(userExam);
-            System.out.println(2);
             userAnswers.forEach(userAnswerService::create);
-            System.out.println(3);
-            System.out.println("Ivertinimas: " +  userExamService.getResult(userExam));
-        } else {
-            System.out.println("Sis egzaminas jau laikytas.");
-        }
+
+            System.out.println("Ivertinimas: " +  result);
+//        } else {
+//            System.out.println("Sis egzaminas jau laikytas.");
+//        }
     }
 
     // Pats procesas testo sprendimo.
@@ -172,7 +181,7 @@ public class ExamService {
             }
             QuestionService questionService = new QuestionService();
             if (null != exam.getName() && newExamName.equals("1")) {
-                questionService.selectQuestionToUpdate(exam);
+                questionService.questionAddOrUpdate(exam);
                 return;
             }
             if (validateName(newExamName)) {

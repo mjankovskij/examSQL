@@ -44,8 +44,13 @@ public class UserExamRepository extends AbstractRepository {
                                         "ON ue.id = ua.userExam " +
                                         "INNER JOIN Question q " +
                                         "ON ue.exam = q.exam " +
-                                        "WHERE ue.user = :user AND ue.exam = :exam AND ua.answer = q.correct AND ua.questionId = q.id"
+                                        "WHERE ue.user = :user " +
+                                        "AND ue.exam = :exam " +
+                                        "AND ua.answer = q.correct " +
+                                        "AND ua.questionId = q.id " +
+                                        "AND ue.id = :id"
                         )
+                                .setParameter("id", userExam.getId())
                                 .setParameter("user", userExam.getUser())
                                 .setParameter("exam", userExam.getExam())
                                 .getSingleResult()

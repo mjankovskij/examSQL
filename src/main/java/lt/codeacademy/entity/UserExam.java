@@ -12,14 +12,17 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "user_exams")
-
 //        uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "exam_id"})}
+
 public class UserExam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Column(nullable = false, length = 2)
+    private Integer result;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
