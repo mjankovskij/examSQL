@@ -18,6 +18,15 @@ public class UserExamRepository extends AbstractRepository {
         });
     }
 
+    public List<UserExam> getAllSameUserExamsByExam(User user, Exam exam) {
+        return getEntityInformation(session ->
+                session.createQuery("FROM UserExam WHERE user=:user AND exam=:exam", UserExam.class)
+                        .setParameter("user", user)
+                        .setParameter("exam", exam)
+                        .getResultList()
+        );
+    }
+
     public void create(UserExam userExam) {
         changeEntity(session -> session.save(userExam));
     }

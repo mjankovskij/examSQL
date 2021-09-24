@@ -19,7 +19,7 @@ public class UserExam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 2)
+    @Column(nullable = true, length = 2)
     private Integer result;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

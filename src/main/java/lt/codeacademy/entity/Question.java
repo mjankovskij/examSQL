@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -28,6 +29,9 @@ public class Question {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "exam_id")
     private Exam exam;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<UserAnswer> userAnswers;
 
     public Question(String description, String answer1, String answer2, String answer3, Character correct, Exam exam) {
         this.description = description;

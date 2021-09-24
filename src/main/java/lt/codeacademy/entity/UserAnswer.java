@@ -17,17 +17,21 @@ public class UserAnswer {
     private Long id;
 
     @Column(nullable = false)
-    private Long questionId;
-
-    @Column(nullable = false)
     private Character answer;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userExam_id")
     private UserExam userExam;
 
-    public UserAnswer(Long questionId, Character answer, UserExam userExam) {
-        this.questionId = questionId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "question_id")
+    private Question question;
+
+//    @Column(nullable = false)
+//    private Long questionId;
+
+    public UserAnswer(Question question, Character answer, UserExam userExam) {
+        this.question = question;
         this.answer = answer;
         this.userExam = userExam;
     }
