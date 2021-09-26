@@ -2,7 +2,6 @@ package lt.codeacademy.service;
 
 import lt.codeacademy.entity.Exam;
 import lt.codeacademy.entity.UserAnswer;
-import lt.codeacademy.repository.QuestionRepository;
 import lt.codeacademy.repository.UserAnswerRepository;
 
 public class UserAnswerService {

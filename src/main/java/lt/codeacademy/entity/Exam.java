@@ -24,15 +24,4 @@ public class Exam {
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserExam> userExams;
-
-//    public Exam(String name, Set<UserExam> userExams, Set<Question> questions)
-//    {
-//        this.name = name;
-//        this.questions = questions;
-//    }
-//
-//    public Exam(String name)
-//    {
-//        this.name = name;
-//    }
 }

@@ -2,8 +2,6 @@ package lt.codeacademy.service;
 
 import lt.codeacademy.entity.*;
 import lt.codeacademy.repository.ExamRepository;
-import lt.codeacademy.repository.UserAnswerRepository;
-import lt.codeacademy.repository.UserExamRepository;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -83,14 +81,8 @@ public class ExamService {
             String select = sc.nextLine();
             switch (select) {
                 case "1" -> {
-// PALIEKAM KAS UZKOMENTUOTA, JEI NORESIM LEISTI VIENAM USERIUI, VIENA EGZAMINA LAIKYTI TIK 1 KARTA
-//                    if (null == userExamService.getByUserAndExamIds(user.getId(), exam.getId())) {
                     examStart(userExamService);
                     sc.nextLine();
-//                    } else {
-//                        System.out.println("Sis egzaminas jau laikytas.");
-//                        return;
-//                    }
                 }
                 case "2" -> {
                     createUpdate(exam);
@@ -122,17 +114,12 @@ public class ExamService {
         System.out.println("-----------------------------");
 
         List<UserAnswer> userAnswers = answerQuestionsProcess(userExam);
-// PALIEKAM KAS UZKOMENTUOTA, JEI NORESIM LEISTI VIENAM USERIUI, VIENA EGZAMINA LAIKYTI TIK 1 KARTA
-//        if (null == userExamService.getByUserAndExamIds(user.getId(), exam.getId())) {
         int result = userExamService.validate(userExam, userAnswers);
         userExam.setResult(result);
         userExamService.create(userExam);
         userAnswers.forEach(userAnswerService::create);
 
         System.out.println("Ivertinimas: " + result);
-//        } else {
-//            System.out.println("Sis egzaminas jau laikytas.");
-//        }
     }
 
     // Pats procesas testo sprendimo.
@@ -221,7 +208,7 @@ public class ExamService {
     private void stats(Exam exam) {
         System.out.println(exam.getName() + " statistika:");
 
-        System.out.println("Egzamians sprestas kartu: " + exam.getUserExams().size());
+        System.out.println("Egzaminas sprestas kartu: " + exam.getUserExams().size());
 
         System.out.println(
                 "Atsakyta i klausimu viso/siame egzamine: "
@@ -265,10 +252,11 @@ public class ExamService {
         List<UserExam> userExamList = userExamService.getAllSameUserExamsByExam(user, exam);
         System.out.println("Jus si egzamina laikete " + userExamList.size() + " kart.");
         userExamList.forEach(e -> {
-            System.out.println("Rezultatas: " +  e.getResult());
+            System.out.println("Rezultatas: " + e.getResult());
         });
     }
 
+    // Naudojamas UserAnswerService
     public List<Exam> getExams() {
         return examRepository.getExams();
     }

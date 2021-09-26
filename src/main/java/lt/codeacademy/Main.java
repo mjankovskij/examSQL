@@ -26,7 +26,6 @@ public class Main {
             MenuService menuService = new MenuService();
             ExamService examService = new ExamService(user);
             menuService.selectExam(examService);
-//            examService.select();
         }
 
         System.out.println("---------------------------------------------------");

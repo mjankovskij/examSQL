@@ -17,9 +17,9 @@ import java.util.Set;
 public class UserExam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(nullable = true, length = 2)
+    @Column(length = 2)
     private Integer result;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -37,14 +37,4 @@ public class UserExam {
         this.user = user;
         this.exam = exam;
     }
-//    public UserExam(User user) {
-//        this.user = user;
-//    }
-//    private Exam exam;
-//    @Column(nullable = false)
-
-//    public UserExam(String name)
-//    {
-//        this.id = id;
-//    }
 }

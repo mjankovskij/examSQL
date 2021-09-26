@@ -16,7 +16,7 @@ public class UserAnswer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1)
     private Character answer;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -26,9 +26,6 @@ public class UserAnswer {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
     private Question question;
-
-//    @Column(nullable = false)
-//    private Long questionId;
 
     public UserAnswer(Question question, Character answer, UserExam userExam) {
         this.question = question;

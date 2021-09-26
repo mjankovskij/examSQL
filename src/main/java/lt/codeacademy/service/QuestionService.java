@@ -23,7 +23,7 @@ public class QuestionService {
         int minLength = 5;
         int maxLength = 50;
         while (true) {
-            long qNum = questionRepository.countQuestions(exam.getId()) + 1;
+            long qNum = questionRepository.countQuestions(exam) + 1;
             System.out.println("-----------------------------------");
             System.out.println("|   0 - Baigti                    |");
             if (null == question.getDescription()) {
@@ -62,6 +62,7 @@ public class QuestionService {
         }
     }
 
+    // Egzamino klausimu redagavimas
     public void questionAddOrUpdate(Exam exam){
         while (true) {
             System.out.println(" --------------------------------------------");
@@ -90,6 +91,7 @@ public class QuestionService {
         }
     }
 
+    // Pasirenkamas egzamino klausimas kuri norima redaguoti.
     public void selectQuestionToUpdate(Exam exam) {
         long num;
         while (true) {
@@ -114,6 +116,7 @@ public class QuestionService {
         }
     }
 
+//    Ivedamas kausimo atsakymas pagal char a, b arba  c. Tiek kuriant nauja, tiek atnaujinant.
     public String enterAnswer(char qNum) {
         String answer;
         int minLength = 1;
@@ -129,6 +132,7 @@ public class QuestionService {
         }
     }
 
+    // Ivedama teisingo atsakymo raide. Tiek kuriant nauja, tiek atnaujinant.
     public char selectCorrectAnswer() {
         while (true) {
             System.out.println(" ----------------------------------------");
@@ -147,6 +151,7 @@ public class QuestionService {
         }
     }
 
+    // Tikrinamas ilgis klausimo, atsakymo.
     public boolean validateLength(String str, int minLength, int maxLength) {
         return str.length() >= minLength
                 && str.length() <= maxLength

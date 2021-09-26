@@ -35,15 +35,4 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserExam> userExams;
 
-
-//    public User(String name, Set<UserExam> userExams)
-//    {
-//        this.name = name;
-//        this.userExams = userExams;
-//    }
-//
-//    public User(String name)
-//    {
-//        this.name = name;
-//    }
 }

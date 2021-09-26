@@ -23,7 +23,7 @@ public class Question {
     @Column(nullable = false, length = 30)
     private String answer1, answer2, answer3;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1)
     private Character correct;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -33,12 +33,4 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserAnswer> userAnswers;
 
-    public Question(String description, String answer1, String answer2, String answer3, Character correct, Exam exam) {
-        this.description = description;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
-        this.correct = correct;
-        this.exam = exam;
-    }
 }
