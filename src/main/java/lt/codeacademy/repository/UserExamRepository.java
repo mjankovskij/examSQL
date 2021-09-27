@@ -21,27 +21,27 @@ public class UserExamRepository extends AbstractRepository {
         changeEntity(session -> session.save(userExam));
     }
 
-    public long getResultSQL(UserExam userExam) {
-        return (long) getEntityInformation(
-                session ->
-                        session.createQuery(
-                                "SELECT COUNT(*) " +
-                                        "FROM UserExam ue " +
-                                        "INNER JOIN UserAnswer ua " +
-                                        "ON ue.id = ua.userExam " +
-                                        "INNER JOIN Question q " +
-                                        "ON ue.exam = q.exam " +
-                                        "WHERE ue.user = :user " +
-                                        "AND ue.exam = :exam " +
-                                        "AND ua.answer = q.correct " +
-                                        "AND ua.questionId = q.id " +
-                                        "AND ue.id = :id"
-                        )
-                                .setParameter("id", userExam.getId())
-                                .setParameter("user", userExam.getUser())
-                                .setParameter("exam", userExam.getExam())
-                                .getSingleResult()
-        );
-    }
+//    public long getResultSQL(UserExam userExam) {
+//        return (long) getEntityInformation(
+//                session ->
+//                        session.createQuery(
+//                                "SELECT COUNT(*) " +
+//                                        "FROM UserExam ue " +
+//                                        "INNER JOIN UserAnswer ua " +
+//                                        "ON ue.id = ua.userExam " +
+//                                        "INNER JOIN Question q " +
+//                                        "ON ue.exam = q.exam " +
+//                                        "WHERE ue.user = :user " +
+//                                        "AND ue.exam = :exam " +
+//                                        "AND ua.answer = q.correct " +
+//                                        "AND ua.questionId = q.id " +
+//                                        "AND ue.id = :id"
+//                        )
+//                                .setParameter("id", userExam.getId())
+//                                .setParameter("user", userExam.getUser())
+//                                .setParameter("exam", userExam.getExam())
+//                                .getSingleResult()
+//        );
+//    }
 
 }
