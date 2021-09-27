@@ -16,9 +16,9 @@ public class UserExamService {
         userExamRepository.create(userExam);
     }
 
-    protected int getResult(UserExam userExam) {
-        return (int) (10d / userExam.getExam().getQuestions().size() * userExamRepository.getResultSQL(userExam));
-    }
+//    protected int getResult(UserExam userExam) {
+//        return (int) (10d / userExam.getExam().getQuestions().size() * userExamRepository.getResultSQL(userExam));
+//    }
 
     public int validate(UserExam userExam, List<UserAnswer> userAnswers) {
         int correctAnswers = (int) userAnswers.stream().filter(e -> e.getAnswer() == e.getQuestion().getCorrect()).count();
