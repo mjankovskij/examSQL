@@ -24,8 +24,7 @@ public class Main {
         User user = authService.login();
         if (null != user) {
             MenuService menuService = new MenuService();
-            ExamService examService = new ExamService(user);
-            menuService.selectExam(examService);
+            menuService.selectExam(user);
         }
 
         System.out.println("---------------------------------------------------");

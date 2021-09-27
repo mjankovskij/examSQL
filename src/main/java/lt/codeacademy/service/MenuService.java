@@ -1,15 +1,18 @@
 package lt.codeacademy.service;
 
+import lt.codeacademy.entity.User;
+
 import java.util.Scanner;
 
 public class MenuService {
-    private Scanner sc;
+    private final Scanner sc;
 
     public MenuService() {
          sc = new Scanner(System.in);
     }
 
-    public void selectExam(ExamService examService) {
+    public void selectExam(User user) {
+        ExamService examService = new ExamService(user);
         while (true) {
             System.out.println(" ---------------------------------");
             System.out.println("|   0 - Baigti darba             |");
